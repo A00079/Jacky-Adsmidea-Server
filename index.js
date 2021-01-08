@@ -1,30 +1,26 @@
-const express = require('express');
-const dotenv = require('dotenv');
-const bodyParser = require('body-parser');
-const cors = require('cors');
+const express = require("express");
+const dotenv = require("dotenv");
+const cors = require("cors");
 const app = express();
-const path = require('path');
+const path = require("path");
 const port = process.env.PORT || 5000;
-
-
-const Contact = require('./routes/Contact/contactus.js');
+const bodyParser = require("body-parser");
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
-// parse application/json
-app.use(bodyParser.json())
-// parse application/vnd.api+json as json
-app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
+app.use(bodyParser.urlencoded({ extended: false }));
 // Middlewares
 app.use(cors());
-// Routes
-app.use('/api/user/contact', Contact);
+dotenv.config();
 
-if (process.env.NODE_ENV === 'production') {
-	app.get('/*', (req, res) => {
-		res.sendFile(path.join(__dirname, 'dist', 'index.html'));
-	});
+// Routes
+app.use("/api/contact", require("./routes/contact"));
+app.use("/api/careers", require("./routes/careers"));
+
+if (process.env.NODE_ENV === "production") {
+  app.get("/*", (req, res) => {
+    res.sendFile(path.join(__dirname, "dist", "index.html"));
+  });
 }
 
 app.listen(port, () => {
-	console.log(`Server Running at ${port}`);
+  console.log(`Server Running at ${port}`);
 });
