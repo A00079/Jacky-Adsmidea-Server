@@ -86,8 +86,25 @@ module.exports = {
     });
   },
 
+  deleteAppliedJob: (req, res) => {
+    const param = req.params.id;
+    careersServices.deleteAppliedJob(param, (err, results) => {
+      if (err) {
+        return res.status(500).json({
+          status: "error",
+          error: err,
+        });
+      } else {
+        return res.status(200).json({
+          status: "success",
+          message: "Job Deleted",
+        });
+      }
+    });
+  },
+
   applyJob: (req, res) => {
-    const body = req.body
+    const body = req.body;
     careersServices.applyJob(body, (err, results) => {
       if (err) {
         return res.status(500).json({
@@ -98,6 +115,23 @@ module.exports = {
         return res.status(200).json({
           status: "success",
           message: "job applied",
+        });
+      }
+    });
+  },
+
+  appliedJobs: (req, res) => {
+    careersServices.getAppliedJobs((err, results) => {
+      if (err) {
+        return res.status(500).json({
+          status: "error",
+          error: err,
+        });
+      } else {
+        return res.status(200).json({
+          status: "success",
+          results: results.length,
+          jobs: results,
         });
       }
     });

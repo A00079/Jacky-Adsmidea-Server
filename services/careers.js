@@ -107,11 +107,34 @@ module.exports = {
     });
   },
 
+  deleteAppliedJob: (param, cb) => {
+    const sql = "DELETE FROM applied_jobs WHERE id = ?";
+    const insertSql = [param];
+    pool.query(sql, insertSql, (err, results) => {
+      if (err) {
+        return cb(err);
+      } else {
+        cb(null, results);
+      }
+    });
+  },
+
   applyJob: (data, cb) => {
     const sql =
       "INSERT INTO applied_jobs ( name, email, contact ) VALUES (? ,?, ?)";
     const insertSql = [data.name, data.email, data.contactNumber];
     pool.query(sql, insertSql, (err, results) => {
+      if (err) {
+        return cb(err);
+      } else {
+        cb(null, results);
+      }
+    });
+  },
+
+  getAppliedJobs: (cb) => {
+    const sql = "SELECT * FROM applied_jobs";
+    pool.query(sql, (err, results) => {
       if (err) {
         return cb(err);
       } else {

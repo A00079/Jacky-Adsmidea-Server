@@ -17,6 +17,7 @@ dotenv.config();
 // Routes
 app.use("/api/contact", require("./routes/contact"));
 app.use("/api/careers", require("./routes/careers"));
+app.use("/api/dashboard", require("./routes/dashboard"));
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "dist")));
