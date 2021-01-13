@@ -23,7 +23,7 @@ module.exports = {
     });
   },
 
-  createaddJob: (data, cb) => {
+  createJob: (data, cb) => {
     const sql =
       "INSERT into careers (location, experience, salary, job_description, key_skills, education, job_title) VALUES (?,?,?,?,?,?,?)";
     const insertSql = [
@@ -98,6 +98,19 @@ module.exports = {
   deleteJob: (param, cb) => {
     const sql = "DELETE FROM careers WHERE id = ?";
     const insertSql = [param];
+    pool.query(sql, insertSql, (err, results) => {
+      if (err) {
+        return cb(err);
+      } else {
+        cb(null, results);
+      }
+    });
+  },
+
+  applyJob: (data, cb) => {
+    const sql =
+      "INSERT INTO applied_jobs ( name, email, contact ) VALUES (? ,?, ?)";
+    const insertSql = [data.name, data.email, data.contactNumber];
     pool.query(sql, insertSql, (err, results) => {
       if (err) {
         return cb(err);

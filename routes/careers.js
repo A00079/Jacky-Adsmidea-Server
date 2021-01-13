@@ -8,6 +8,7 @@ router.get("/job", careerController.job);
 
 // POST
 router.post("/createjob", careerController.createJob);
+router.post("/applyjob", careerController.applyJob);
 
 // PATCH
 router.patch("/updatejob/:id", careerController.updateJob);
