@@ -2,10 +2,11 @@ const mysql = require("mysql");
 
 var pool = mysql.createPool({
 	multipleStatements: true,
-	host: "localhost",
-	user: "root",
-	password: "",
-	database: "adsmedia",
+	host: "103.108.220.91",
+	user: "ssynvngg_jacky",
+	password: "adsmedia@2021",
+	database: "ssynvngg_adsmedia",
+	port:3306
 });
 
 pool.getConnection((err) => {

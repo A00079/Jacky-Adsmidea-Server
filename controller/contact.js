@@ -5,8 +5,8 @@ const nodemailer = require("nodemailer");
 module.exports = {
   sendMail: (req, res) => {
     let transport = nodemailer.createTransport({
-      host: "smtp.hostinger.in",
-      port: 587,
+      host: "smtp.adsrevenue.co",
+      port: 993,
       secure: false, // use SSL
       auth: {
         user: process.env.MAIL_USER,
